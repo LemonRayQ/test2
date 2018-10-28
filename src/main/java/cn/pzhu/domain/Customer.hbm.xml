@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="cn.pzhu.domain">
+    <class name="Customer" table="cst_customer">
+        <id name="cust_id">
+            <generator class="native"></generator>
+        </id>
+        <property name="cust_name"></property>
+        <property name="cust_source"></property>
+        <property name="cust_industry"></property>
+        <property name="cust_level"></property>
+        <property name="cust_linkman"></property>
+        <property name="cust_phone"></property>
+        <property name="cust_mobile"></property>
+        <!--
+        cascade:级联操作
+           级联保存：save-update
+           删除：  delete
+           all: save-update+delete
+        -->
+        <!--inverse属性：（只能在一方 放弃维护）
+                    true:放弃维护
+                    false：维护
+       -->
+      <set name="linkMens" inverse="true" >
+          <key column="lkm_cust_id"></key>
+          <one-to-many class="LinkMan"></one-to-many>
+      </set>
+    
+    </class>
+</hibernate-mapping>
